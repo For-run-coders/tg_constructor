@@ -38,7 +38,10 @@ jib {
         }
     }
 }
-
-//apply(plugin = "com.google.cloud.tools.jib")
+java {
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
+}
 
 
