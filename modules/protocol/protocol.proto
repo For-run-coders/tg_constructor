@@ -7,14 +7,16 @@ option go_package = "proto.botconstructor";
 message Config {
     string id = 1;
     string bot_name = 2;
+    repeated Node nodes = 3;
 }
 
 message Node {
     string id = 1;
     string name = 2;
+    string next_node_id = 3;
     oneof action {
-        Button button = 3;
-        MessageSent message_sent = 4;
+        Button button = 4;
+        MessageSent message_sent = 5;
     }
 }
 
