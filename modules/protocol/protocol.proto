@@ -5,5 +5,23 @@ package protocol;
 option go_package = "proto.botconstructor";
 
 message Config {
-    string bot_name = 1;
+    string id = 1;
+    string bot_name = 2;
+}
+
+message Node {
+    string id = 1;
+    string name = 2;
+    oneof action {
+        Button button = 3;
+        MessageSent message_sent = 4;
+    }
+}
+
+message Button {
+    string name = 1;
+}
+
+message MessageSent {
+    string text = 1;
 }

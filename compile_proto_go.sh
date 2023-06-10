@@ -1,1 +1,1 @@
-protoc -I protocol/ --go_out=bot/ protocol/protocol.proto
+protoc -I modules/protocol/ --go_out=modules/bot/ modules/protocol/protocol.proto
