@@ -1,0 +1,9 @@
+syntax = "proto3";
+
+package protocol;
+
+option go_package = "proto.botconstructor";
+
+message Config {
+    string bot_name = 1;
+}
