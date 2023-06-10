@@ -1,7 +1,5 @@
-import AuthPage from "./AuthPage/AuthPage";
-import CreateNewBotPage from "./CreateNewBotPage/CreateNewBotPage";
+import AuthPage from './auth.page';
+import CreateNewBotPage from './createnewbot.page';
+import InformationAboutBotPage from './informationaboutbot';
 
-export {
-    AuthPage,
-    CreateNewBotPage
-}
+export { AuthPage, CreateNewBotPage, InformationAboutBotPage };
