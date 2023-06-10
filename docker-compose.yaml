@@ -6,6 +6,6 @@ services:
     ports:
       - "5432:5432"
   service:
-    image: somekindofmodule
+    image: schemamanager
     environment:
       - PG_HOST=database
