@@ -7,8 +7,10 @@ import org.flywaydb.core.Flyway;
 public class FlywayConfig {
     public void migrate() {
         String pgHost = System.getenv("PG_HOST");
+        String user = System.getenv("DB_USERNAME");
+        String password = System.getenv("DB_PASSWORD");
         Flyway flyway = Flyway.configure()
-                .dataSource(String.format("jdbc:postgresql://%s/postgres", pgHost), "postgres", "password")
+                .dataSource(String.format("jdbc:postgresql://%s/postgres", pgHost), user, password)
                 .locations("db/migrations")
                 .defaultSchema("bot")
                 .load();
