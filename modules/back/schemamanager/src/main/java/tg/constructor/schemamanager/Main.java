@@ -5,8 +5,7 @@ import tg.constructor.schemamanager.config.FlywayConfig;
 
 @Slf4j
 public class Main {
-
-    public static void main(String[] args) throws Exception{
+    public static void main(String[] args) {
         var flywayConfig = new FlywayConfig();
         flywayConfig.migrate();
     }
