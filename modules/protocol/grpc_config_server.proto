@@ -1,0 +1,14 @@
+syntax = "proto3";
+package config_server;
+
+import "protocol.proto";
+
+option go_package = "proto.botconstructor";
+
+service ConfigService {
+    rpc GetConfig(GetConfigRequest) returns (protocol.Config);
+}
+
+message GetConfigRequest {
+    string bot_id = 1;
+}
