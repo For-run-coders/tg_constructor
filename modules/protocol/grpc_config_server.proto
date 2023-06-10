@@ -6,9 +6,13 @@ import "protocol.proto";
 option go_package = "proto.botconstructor";
 
 service ConfigService {
-    rpc GetConfig(GetConfigRequest) returns (protocol.Config);
+    rpc GetConfig(GetConfigRequest) returns (GetConfigResponse);
 }
 
 message GetConfigRequest {
     string bot_id = 1;
+}
+
+message GetConfigResponse {
+    protocol.Config config = 1;
 }

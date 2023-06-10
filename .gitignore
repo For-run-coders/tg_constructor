@@ -1,2 +1,4 @@
 modules/bot/proto*
 modules/bot/output
+modules/config_service/proto*
+modules/config_service/output

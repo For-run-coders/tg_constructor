@@ -4,7 +4,6 @@ import (
 	"context"
 	"fmt"
 	proto_botconstructor "hakaton/tg_bot_constructor/proto.botconstructor"
-	"html"
 	"log"
 	"net/http"
 	"os"
@@ -12,8 +11,13 @@ import (
 	"sync"
 )
 
+var botMeta BotMeta
+
 func main() {
 	fmt.Println("HELLO THIS IS BOT")
+	botMeta = BotMeta{
+		Name: "hakaton",
+	}
 	config := proto_botconstructor.Config{
 		BotName: "hakaton",
 	}
@@ -58,14 +62,19 @@ func startServer(port int, wg *sync.WaitGroup) *http.Server {
 }
 
 func handleRoot(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Hello, %q", html.EscapeString(r.URL.Path))
+	fmt.Fprintf(w, "Hello, this is %s", botMeta.Name)
 }
 
 func registerShutdown(wg *sync.WaitGroup) {
 	http.HandleFunc("/shutdown", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Fprintf(w, "Shutting down %s", botMeta.Name)
 		log.Println("Shuttig down")
 		go func() {
 			wg.Done()
 		}()
 	})
+}
+
+type BotMeta struct {
+	Name string
 }
