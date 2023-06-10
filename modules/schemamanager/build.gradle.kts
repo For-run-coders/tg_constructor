@@ -23,6 +23,21 @@ repositories {
     mavenCentral()
 }
 
+jib {
+    from {
+        image = "eclipse-temurin"
+        auth {
+            username = System.getProperty("DOCKER_USERNAME")
+            password = System.getProperty("DOCKER_PASSWORD")
+        }
+    }
+    to {
+        auth {
+            username = System.getProperty("DOCKER_USERNAME")
+            password = System.getProperty("DOCKER_PASSWORD")
+        }
+    }
+}
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(17))
