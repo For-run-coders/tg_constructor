@@ -3,4 +3,5 @@ go 1.20
 use (
 	./modules/bot
 	./modules/config_service
+	./modules/pulling_telegram_proxy
 )
