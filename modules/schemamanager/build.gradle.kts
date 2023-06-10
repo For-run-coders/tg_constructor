@@ -23,21 +23,6 @@ repositories {
     mavenCentral()
 }
 
-jib {
-    from {
-        image = "eclipse-temurin"
-        auth {
-            username = "ludoedik" // Defined in 'gradle.properties'.
-            password = "WarrengForDocker319"
-        }
-    }
-    to {
-        auth {
-            username = "ludoedik"
-            password = "WarrengForDocker319"
-        }
-    }
-}
 java {
     toolchain {
         languageVersion.set(JavaLanguageVersion.of(17))
