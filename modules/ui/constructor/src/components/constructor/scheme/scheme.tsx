@@ -1,6 +1,8 @@
 import * as React from "react";
 import {FC, useState} from "react";
-import {Box} from "@mui/material";
+import {Box, Button} from "@mui/material";
+import {ActionBase} from "../../../model/action.base";
+import {UuidUtil} from "../../../utils/UuidUtil";
 
 export interface SchemeProps {
 
@@ -8,11 +10,17 @@ export interface SchemeProps {
 
 const SchemeComponent: FC<SchemeProps> = (props) => {
 
-    const [] = useState();
+    const [actions, setActions] = useState<ActionBase[]>([]);
+
+    const handleCreateAction = () => {
+
+    }
 
     return (
-        <Box component="div" sx={{p: 2, border: '1px dashed grey'}}>
-            lol
+        <Box component="div" sx={{p: 2, border: '1px dashed grey', width: '100%'}}>
+            <Button onClick={handleCreateAction}>
+                +
+            </Button>
         </Box>
     );
 
