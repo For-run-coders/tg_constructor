@@ -17,6 +17,7 @@ message Node {
     oneof action {
         Button button = 4;
         MessageSent message_sent = 5;
+        Start start = 6;
     }
 }
 
@@ -26,4 +27,8 @@ message Button {
 
 message MessageSent {
     string text = 1;
+}
+
+message Start {
+
 }
