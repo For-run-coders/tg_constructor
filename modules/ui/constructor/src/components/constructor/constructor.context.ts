@@ -1,5 +1,5 @@
-import React from "react";
-import {ActionBase} from "../../model/action.base";
+import React from 'react';
+import { ActionBase } from '../../model/action.base';
 
 export interface ConstructorContextData {
     actions: ActionBase[];
@@ -10,5 +10,5 @@ export interface ConstructorContextData {
 export const ConstructorContext = React.createContext<ConstructorContextData>({
     actions: [],
     isEnableToChooseAction: false,
-    changeEnableToChooseAction: () => {}
+    changeEnableToChooseAction: () => {},
 });

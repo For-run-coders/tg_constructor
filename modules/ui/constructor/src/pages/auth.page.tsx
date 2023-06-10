@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import {Button, Input, Typography} from '@mui/material';
-import {Link} from 'react-router-dom';
-import {PathRouter} from '../utils/utils';
-import {useObjectState} from "../hooks/object-state";
+import { Button, Input, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
+import { PathRouter } from '../utils/route.utils';
+import { useObjectState } from '../hooks/object-state';
 
 const Container = styled.div`
   display: flex;
@@ -17,7 +17,7 @@ const Content = styled.div`
   flex-direction: column;
 `;
 
-const {bots, createBot} = PathRouter;
+const { bots, createBot } = PathRouter;
 
 interface Data {
     name: string;
@@ -26,13 +26,13 @@ interface Data {
 const AuthPage = () => {
 
     const [data, setDataByKey] = useObjectState<Data>({
-        name: ''
+        name: '',
     });
 
     return (
         <Container>
             <Content>
-                <Typography textAlign="center">Введите имя бота</Typography>
+                <Typography textAlign='center'>Введите имя бота</Typography>
 
                 <Input
                     value={data.name}
