@@ -4,6 +4,7 @@ import {Actions} from "./actions/actions";
 import {ConstructorContext, ConstructorContextData} from "./constructor.context";
 import {Scheme} from "./scheme/scheme";
 import {ActionBase} from "../../model/action.base";
+import {Container} from "@mui/material";
 
 export interface ConstructorProps {
     actions: ActionBase[];
@@ -17,8 +18,10 @@ const ConstructorComponent: FC<ConstructorProps> = (props) => {
 
     return (
         <ConstructorContext.Provider value={ctxValue}>
-            <Actions/>
-            <Scheme/>
+            <Container maxWidth='xl'>
+                <Actions/>
+                <Scheme/>
+            </Container>
         </ConstructorContext.Provider>
     );
 
