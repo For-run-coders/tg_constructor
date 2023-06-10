@@ -9,3 +9,5 @@ services:
     image: schemamanager
     environment:
       - PG_HOST=database
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=password
