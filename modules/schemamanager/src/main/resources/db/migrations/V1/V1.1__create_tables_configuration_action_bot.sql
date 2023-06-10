@@ -9,7 +9,7 @@ create table if not exists action
 (
     "name"      varchar(50)  primary key,
     description varchar(100) not null
-    );
+);
 
 create table if not exists action_field
 (
@@ -18,7 +18,7 @@ create table if not exists action_field
     description varchar(100) not null,
     "type"      varchar(100) not null,
     action_name   varchar(50)  not null,
-    constraint fk_action foreign key (action_id) references action ("name")
+    constraint fk_action foreign key (action) references action ("name")
 );
 
 create table if not exists bot
