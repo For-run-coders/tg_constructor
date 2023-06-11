@@ -62,8 +62,16 @@ const SchemeComponent: FC<SchemeProps> = (props) => {
         setCurrentActions(newActions);
     };
 
-    const sendConfig = () => {
-
+    const sendConfig = async () => {
+        await fetch('http://127.0.0.1:8080/create-bot', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                actions: currentActions
+            })
+        })
     }
 
     return (
