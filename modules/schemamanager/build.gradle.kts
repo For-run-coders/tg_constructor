@@ -26,16 +26,9 @@ repositories {
 jib {
     from {
         image = "eclipse-temurin"
-        auth {
-            username = System.getProperty("DOCKER_USERNAME")
-            password = System.getProperty("DOCKER_PASSWORD")
-        }
     }
     to {
-        auth {
-            username = System.getProperty("DOCKER_USERNAME")
-            password = System.getProperty("DOCKER_PASSWORD")
-        }
+        image = "ghcr.io/for-run-coders/schemamanger"
     }
 }
 java {
