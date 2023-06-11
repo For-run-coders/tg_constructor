@@ -2,7 +2,7 @@
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <title>React App</title>
+    <title><%= htmlWebpackPlugin.options.title %></title>
     <style>
       html {
         width: 100%;
@@ -14,9 +14,12 @@
         margin: 0;
         padding: 0;
       }
+      #root {
+        height: 100%;
+      }
     </style>
   </head>
   <body>
-    <div id="root" style="height: 100%"></div>
+    <div id="root"></div>
   </body>
 </html>
