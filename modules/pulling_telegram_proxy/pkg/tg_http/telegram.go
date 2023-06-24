@@ -14,9 +14,10 @@ type ProxyData struct {
 	BotUrl  string
 	Db      domain.UpdatesDb
 	Timeout int
+	Config  domain.BotConfig
 }
 
-func (p ProxyData) GetUpdates() []domain.Update {
+func (p *ProxyData) GetUpdates() []domain.Update {
 	offset, err := p.Db.Latest()
 	if err != nil {
 		log.Fatal(err)
@@ -43,7 +44,7 @@ func (p ProxyData) GetUpdates() []domain.Update {
 	return update.Result
 }
 
-func (p ProxyData) HandleMessage(message *domain.Message) {
+func (p *ProxyData) HandleMessage(message *domain.Message) {
 	log.Printf("Handling message: %+v", message)
 
 	if message.Text == "/start" {
@@ -53,12 +54,13 @@ func (p ProxyData) HandleMessage(message *domain.Message) {
 	}
 }
 
-func (p ProxyData) HandleStart(message *domain.Message) {
-	response := "Hello, " + message.Chat.FirstName + "! Did you really just decided to start this bot? 🤠"
+func (p *ProxyData) HandleStart(message *domain.Message) {
+	n := p.Config.BotName
+	response := "Hello, " + message.Chat.FirstName + "! Did you really just decided to start " + n + "? 🤠"
 	p.SendMessage(message, response)
 }
 
-func (p ProxyData) SendMessage(message *domain.Message, response string) {
+func (p *ProxyData) SendMessage(message *domain.Message, response string) {
 	log.Printf("Sending message: %s", response)
 	sendMessage := domain.SendMessage{
 		ChatId: message.Chat.Id,

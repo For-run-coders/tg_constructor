@@ -39,3 +39,7 @@ type TelegramProxy interface {
 	HandleStart(Message)
 	SendMessage(Message, string)
 }
+
+type BotConfig struct {
+	BotName string
+}

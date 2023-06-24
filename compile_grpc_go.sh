@@ -4,4 +4,8 @@ protoc -I modules/protocol/ \
     modules/protocol/protocol.proto \
     modules/protocol/grpc_config_server.proto
 
-cp -vR modules/config_service/proto.botconstructor modules/pulling_telegram_proxy/proto.botconstructor
+protoc -I modules/protocol/ \
+    --go_out=modules/pulling_telegram_proxy/ \
+    --go-grpc_out=modules/pulling_telegram_proxy/ \
+    modules/protocol/protocol.proto \
+    modules/protocol/grpc_config_server.proto
