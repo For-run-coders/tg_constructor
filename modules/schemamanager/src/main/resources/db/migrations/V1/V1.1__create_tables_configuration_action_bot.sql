@@ -27,4 +27,4 @@ create table if not exists bot
     "name"           varchar(50) not null,
     configuration_id serial      not null,
     constraint fk_configuration foreign key (configuration_id) references configuration (id)
-)
+);
