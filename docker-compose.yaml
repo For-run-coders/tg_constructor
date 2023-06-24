@@ -29,3 +29,10 @@ services:
     environment:
       - PORT=8080
       - DATABASE_URL=postgres://postgres:password@database:5432/postgres
+  flyway:
+    image: flyway/flyway
+    command: -url=jdbc:postgresql://database/postgres -schemas=bot -user=postgres -password=password -connectRetries=60 migrate
+    volumes:
+      - ./sql_schema:/flyway/sql
+    depends_on:
+      - database
