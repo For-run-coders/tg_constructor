@@ -16,6 +16,10 @@ module.exports = (env) => {
                     test: /\.(ts|tsx)$/,
                     loader: 'ts-loader',
                 },
+                {
+                    test: /\.css$/i,
+                    use: ["style-loader", "css-loader"],
+                },
             ],
         },
         resolve: {
@@ -35,5 +39,10 @@ module.exports = (env) => {
             static: './dist',
             port: 3000,
         },
+        performance: {
+            hints: false,
+            maxEntrypointSize: 512000,
+            maxAssetSize: 512000
+        }
     };
 };

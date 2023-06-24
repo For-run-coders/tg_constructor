@@ -1,10 +1,11 @@
 import * as React from 'react';
 import { FC, useState } from 'react';
-import { Actions } from './actions/actions';
-import { ConstructorContext, ConstructorContextData } from './constructor.context';
-import { Scheme } from './scheme/scheme';
+import 'reactflow/dist/style.css';
 import { NullableTgActionBase, TgActionBase } from '../../model/tg-action.base';
-import { Container } from '@mui/material';
+import { ConstructorContext, ConstructorContextData } from './constructor.context';
+import { WorkingField } from './working-field/working-field';
+import { ReactFlowProvider } from 'reactflow';
+import { TgActionRequest } from '../../model/tg-action.request';
 
 export interface ConstructorProps {
     actions: TgActionBase[];
@@ -12,32 +13,42 @@ export interface ConstructorProps {
 
 const ConstructorComponent: FC<ConstructorProps> = (props) => {
 
-    const [isEnableToChooseAction, setIsEnableToChooseAction] = useState<boolean>(false);
-
     const [selectedAction, setSelectedAction] = useState<NullableTgActionBase>(null);
 
-    const handleChangeEnableToChooseAction = (value: boolean) => {
-        setIsEnableToChooseAction(value);
-    };
+    const [currentActions, setCurrentActions] = useState<TgActionRequest[]>([]);
 
     const handleSelectAction = (action: NullableTgActionBase) => {
         setSelectedAction(action);
-    }
+    };
+
+    const handleChangeAction = (newAction: TgActionRequest) => {
+        setCurrentActions(prev => ([...prev].map((action) => {
+            if (action.name === newAction.name) {
+                return newAction;
+            }
+            return action;
+        })));
+    };
+
+    const handleAddCurrentAction = (newAction: TgActionRequest) => {
+        const ne = [...currentActions, newAction];
+        setCurrentActions(ne);
+    };
 
     const ctxValue: ConstructorContextData = {
-        actions: props.actions,
-        isEnableToChooseAction: isEnableToChooseAction,
-        changeEnableToChooseAction: handleChangeEnableToChooseAction,
+        availableActions: props.actions,
         selectedAction: selectedAction,
-        changeSelectAction: handleSelectAction
+        currentActions: currentActions,
+        changeCurrentAction: handleChangeAction,
+        changeSelectAction: handleSelectAction,
+        addCurrentAction: handleAddCurrentAction
     };
 
     return (
         <ConstructorContext.Provider value={ctxValue}>
-            <Container style={{ display: 'flex', width: '100%' }} maxWidth='xl'>
-                <Actions />
-                <Scheme />
-            </Container>
+            <ReactFlowProvider>
+                <WorkingField />
+            </ReactFlowProvider>
         </ConstructorContext.Provider>
     );
 

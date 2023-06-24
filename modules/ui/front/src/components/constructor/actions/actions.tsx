@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { FC, useContext } from 'react';
-import { Box, List, ListItemButton, ListItemText } from '@mui/material';
+import { Card, List, ListItemButton, ListItemText } from '@mui/material';
 import { ConstructorContext } from '../constructor.context';
 import { TgActionBase } from '../../../model/tg-action.base';
 
@@ -11,35 +11,34 @@ const ActionsComponent: FC<ActionsProps> = (props) => {
 
     const ctx = useContext(ConstructorContext);
 
-    const actionsMap = ctx.actions.reduce(
+    const actionsMap = ctx.availableActions.reduce(
         (prev: Map<string, TgActionBase>, item: TgActionBase) => {
             prev.set(item.name, item);
             return prev;
         },
-        new Map<string, TgActionBase>()
-    )
+        new Map<string, TgActionBase>(),
+    );
 
-    const handleActionClick = (actionId: string) => () => {
-        if (ctx.isEnableToChooseAction) {
-            const selectedAction = actionsMap.get(actionId);
-            if (selectedAction) {
-                ctx.changeSelectAction(selectedAction);
-            }
+    const handleActionClick = (actionId: string) => (event: React.MouseEvent<HTMLDivElement>) => {
+        event.stopPropagation();
+        const selectedAction = actionsMap.get(actionId);
+        if (selectedAction) {
+            ctx.changeSelectAction(selectedAction);
         }
-    }
+    };
 
     return (
-        <Box component='div' sx={{ p: 2, border: '1px dashed grey' }}>
-            <List sx={{ width: '100%', height: '100%', maxWidth: 360}}>
+        <Card>
+            <List sx={{ width: '100%', height: '100%', maxWidth: 360 }}>
                 {
-                    ctx.actions.map((action) => (
-                        <ListItemButton onClick={handleActionClick(action.name)}>
+                    ctx.availableActions.map((action) => (
+                        <ListItemButton onClick={handleActionClick(action.name)} selected={ctx.selectedAction ? action.name === ctx.selectedAction.name : false}>
                             <ListItemText primary={action.name} secondary={action.description} />
                         </ListItemButton>
                     ))
                 }
             </List>
-        </Box>
+        </Card>
     );
 
 };

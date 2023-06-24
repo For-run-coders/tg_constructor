@@ -1,19 +1,21 @@
 import * as React from 'react';
-import { FC, useState } from 'react';
+import { FC, useContext, useState } from 'react';
 import { Card, CardContent, CardHeader } from '@mui/material';
 import { TgActionFieldRequest, TgActionRequest } from '../../../model/tg-action.request';
 import { ActionField } from './action-field';
+import { ConstructorContext } from '../constructor.context';
 
 export interface ActionPanelProps {
     action: TgActionRequest;
-    onChangeAction: (newAction: TgActionRequest) => void;
 }
 
 const ActionPanelComponent: FC<ActionPanelProps> = (props) => {
 
     const [] = useState();
 
-    const { action, onChangeAction } = props;
+    const ctx = useContext(ConstructorContext);
+
+    const { action } = props;
 
     const fields: TgActionFieldRequest[] = [
         ...action.fields
@@ -29,7 +31,7 @@ const ActionPanelComponent: FC<ActionPanelProps> = (props) => {
             }
             return field;
         });
-        onChangeAction({
+        ctx.changeCurrentAction({
             ...action,
             fields: newFields
         });
@@ -51,7 +53,6 @@ const ActionPanelComponent: FC<ActionPanelProps> = (props) => {
         <Card sx={{ width: 400, mb: 1 }} variant='outlined'>
             <CardHeader title={action.name} />
             <CardContent>
-                <div style={{marginBottom: 15}}>{`ID: ${action.id}`}</div>
                 {
                     fields.map(renderField)
                 }
