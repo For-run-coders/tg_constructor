@@ -5,7 +5,7 @@ services:
       - POSTGRES_PASSWORD=password
     ports:
       - "5432:5432"
-  service:
+  schemamanger:
     image: ghcr.io/for-run-coders/schemamanger
     environment:
       - PG_HOST=database
@@ -16,3 +16,7 @@ services:
     environment:
       - BOT_TOKEN=<token>
       - TIMEOUT=5
+  config_service:
+    image: ghcr.io/for-run-coders/config_service
+    environment:
+      - DATABASE_URL=schemamanger

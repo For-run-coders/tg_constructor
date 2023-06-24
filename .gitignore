@@ -1,5 +1,4 @@
-modules/bot/proto*
-modules/config_service/proto*
+modules/*/proto.bot*
 modules/schemamanager/build
 modules/schemamanager/.gradle
 modules/*/output
