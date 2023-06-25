@@ -1,3 +1,3 @@
-docker build -t ghcr.io/for-run-coders/bot .
+./build_image.sh
 docker login ghcr.io
 docker push ghcr.io/for-run-coders/bot
