@@ -3,13 +3,15 @@ package main
 import (
 	"flag"
 	"fmt"
+	commons_logging "hakaton/golang_commons"
 	"hakaton/pulling_telegram_proxy/pkg/config"
 	database "hakaton/pulling_telegram_proxy/pkg/db"
 	"hakaton/pulling_telegram_proxy/pkg/domain"
 	"hakaton/pulling_telegram_proxy/pkg/tg_http"
-	"log"
 	"os"
 	"strings"
+
+	log "github.com/sirupsen/logrus"
 )
 
 const telegramApiUrl = "https://api.telegram.org/"
@@ -24,6 +26,7 @@ var (
 )
 
 func main() {
+	commons_logging.ConfigureLogger("pulling_telegram_proxy")
 	SetFlagsFromEnvironment()
 	flag.Parse()
 	validateFlags()

@@ -2,12 +2,13 @@ package config
 
 import (
 	"context"
-	"log"
 
 	pb "hakaton/pulling_telegram_proxy/proto.botconstructor"
 
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
+
+	log "github.com/sirupsen/logrus"
 )
 
 type ConfigServiceClient struct {

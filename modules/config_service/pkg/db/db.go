@@ -3,9 +3,10 @@ package db
 import (
 	"context"
 	"hakaton/config_service/pkg/domain"
-	"log"
 
 	"github.com/jackc/pgx/v5"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func GetConnection(ctx context.Context, url string) *pgx.Conn {

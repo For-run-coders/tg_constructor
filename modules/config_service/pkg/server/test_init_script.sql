@@ -1,3 +1,7 @@
+create schema bot;
+
+set search_path to bot;
+
 create table if not exists configuration
 (
     id     serial primary key,
@@ -29,4 +33,4 @@ create table if not exists bot
     constraint fk_configuration foreign key (configuration_id) references configuration (id)
 );
 
-insert into configuration("name", data) values('test_bot_id', '{ "name": "test_bot_id"}')
+insert into configuration("name", data) values('test_bot_id', '{ "name": "test_bot_id"}');

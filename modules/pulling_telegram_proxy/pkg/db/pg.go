@@ -4,9 +4,10 @@ import (
 	"context"
 	"flag"
 	"hakaton/pulling_telegram_proxy/pkg/domain"
-	"log"
 
 	"github.com/jackc/pgx/v5"
+
+	log "github.com/sirupsen/logrus"
 )
 
 var (

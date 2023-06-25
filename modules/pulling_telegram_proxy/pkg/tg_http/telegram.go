@@ -6,8 +6,9 @@ import (
 	"fmt"
 	"hakaton/pulling_telegram_proxy/pkg/domain"
 	"io"
-	"log"
 	"net/http"
+
+	log "github.com/sirupsen/logrus"
 )
 
 type ProxyData struct {

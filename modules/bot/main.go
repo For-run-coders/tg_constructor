@@ -3,25 +3,29 @@ package main
 import (
 	"context"
 	"fmt"
-	proto_botconstructor "hakaton/tg_bot_constructor/proto.botconstructor"
-	"log"
+	pb "hakaton/tg_bot_constructor/proto.botconstructor"
 	"net/http"
 	"os"
 	"strconv"
 	"sync"
+
+	log "github.com/sirupsen/logrus"
+
+	commons_logging "hakaton/golang_commons"
 )
 
 var botMeta BotMeta
 
 func main() {
-	fmt.Println("HELLO THIS IS BOT")
+	commons_logging.ConfigureLogger("bot")
+	log.Info("HELLO THIS IS BOT")
 	botMeta = BotMeta{
 		Name: "hakaton",
 	}
-	config := proto_botconstructor.Config{
+	config := pb.Config{
 		BotName: "hakaton",
 	}
-	fmt.Printf("Config: %+v\n", config.BotName)
+	log.Infof("Config: %+v", config.BotName)
 
 	port, e := os.LookupEnv("SERVER_PORT")
 	if !e {
@@ -62,6 +66,7 @@ func startServer(port int, wg *sync.WaitGroup) *http.Server {
 }
 
 func handleRoot(w http.ResponseWriter, r *http.Request) {
+	log.Info("In root")
 	fmt.Fprintf(w, "Hello, this is %s", botMeta.Name)
 }
 

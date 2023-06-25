@@ -5,6 +5,7 @@ go 1.20
 require (
 	github.com/hashicorp/go-memdb v1.3.4
 	github.com/jackc/pgx/v5 v5.3.1
+	github.com/sirupsen/logrus v1.9.3
 	google.golang.org/grpc v1.56.1
 	google.golang.org/protobuf v1.30.0
 )

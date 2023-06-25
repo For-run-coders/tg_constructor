@@ -4,7 +4,6 @@ import (
 	"context"
 	"flag"
 	"fmt"
-	"log"
 	"net"
 	"os"
 	"strings"
@@ -15,6 +14,9 @@ import (
 	"hakaton/config_service/pkg/db"
 	"hakaton/config_service/pkg/server"
 	pb "hakaton/config_service/proto.botconstructor"
+	commons_logging "hakaton/golang_commons"
+
+	log "github.com/sirupsen/logrus"
 )
 
 var (
@@ -23,6 +25,7 @@ var (
 )
 
 func main() {
+	commons_logging.ConfigureLogger("config_service")
 	SetFlagsFromEnvironment()
 	flag.Parse()
 	if *port == 0 {

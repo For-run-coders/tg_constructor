@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"hakaton/config_service/pkg/db"
 	"hakaton/config_service/pkg/server"
-	"log"
 	"net"
 	"testing"
 
@@ -20,6 +19,8 @@ import (
 	"google.golang.org/grpc/test/bufconn"
 
 	pb "hakaton/config_service/proto.botconstructor"
+
+	log "github.com/sirupsen/logrus"
 )
 
 func TestWithPostgres(t *testing.T) {

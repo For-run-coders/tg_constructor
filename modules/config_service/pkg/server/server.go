@@ -5,9 +5,9 @@ import (
 	"hakaton/config_service/pkg/db"
 
 	pb "hakaton/config_service/proto.botconstructor"
-	"log"
 
 	"github.com/jackc/pgx/v5"
+	log "github.com/sirupsen/logrus"
 )
 
 type Server struct {
