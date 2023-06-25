@@ -1,7 +1,8 @@
 FROM golang:alpine AS builder
 
 WORKDIR /build
-COPY . .
+COPY ./pulling_telegram_proxy .
+COPY golang_commons/ ../golang_commons
 
 RUN go mod download
 RUN go vet -v

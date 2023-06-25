@@ -1,1 +1,1 @@
-docker build -t ghcr.io/for-run-coders/bot .
+docker build -f ./Dockerfile -t ghcr.io/for-run-coders/bot ../
