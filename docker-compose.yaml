@@ -16,16 +16,22 @@ services:
   pulling_proxy:
     image: ghcr.io/for-run-coders/pulling_telegram_proxy
     container_name: pulling_proxy
+    volumes:
+      - ./logs:/app/log
     environment:
       - BOT_TOKEN=<INSERT BOT TOKEN HERE>
       - TIMEOUT=5
       - CONFIG_SERVICE_ADDRESS=config_service:8080
       - BOT_NAME=Test configuration
+    depends_on:
+      - config_service
   config_service:
     image: ghcr.io/for-run-coders/config_service
     container_name: config_service
     ports:
       - "8080:8080"
+    volumes:
+      - ./logs:/app/log
     environment:
       - PORT=8080
       - DATABASE_URL=postgres://postgres:password@database:5432/postgres

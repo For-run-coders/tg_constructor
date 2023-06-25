@@ -3,3 +3,4 @@ modules/schemamanager/build
 modules/schemamanager/.gradle
 modules/*/output
 log/*
+logs/*

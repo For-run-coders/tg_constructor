@@ -10,7 +10,7 @@ RUN go vet -v
 RUN CGO_ENABLED=0 go build -o pulling_telegram_proxy main.go
 
 FROM gcr.io/distroless/static-debian11
-WORKDIR /build
+WORKDIR /app
 
-COPY --from=builder /build/pulling_telegram_proxy /build/pulling_telegram_proxy
+COPY --from=builder /build/pulling_telegram_proxy /app/pulling_telegram_proxy
 CMD ["./pulling_telegram_proxy"]

@@ -8,6 +8,12 @@ import (
 
 func ConfigureLogger(name string) {
 	logDir := "log/" + name
+	log.Infof("Initializing logging at %s", logDir)
+	dir, err2 := os.Getwd()
+	if err2 != nil {
+		log.Fatal(err2)
+	}
+	log.Infof("Working directory: %s", dir)
 	err := os.MkdirAll(logDir, os.ModePerm)
 	if err != nil {
 		log.Error("Failed to create log directory")
