@@ -17,7 +17,7 @@ import { UuidUtils } from '../../../utils/uuid.utils';
 import { ActionNode } from '../action-node/action-node';
 import { ConstructorContext } from '../constructor.context';
 import { ActionUtils } from '../../../utils/action.utils';
-import { EdgeChange } from '@reactflow/core/dist/esm/types/changes';
+import {EdgeChange, NodeRemoveChange} from '@reactflow/core/dist/esm/types/changes';
 import { Connection } from '@reactflow/core/dist/esm/types/general';
 
 export interface WorkingFieldProps {
@@ -48,9 +48,13 @@ const WorkingFieldComponent: FC<WorkingFieldProps> = (props) => {
 
     const onNodesChange = useCallback(
         (nodeChanges: NodeChange[]) => {
+            const change = nodeChanges[0];
+            if (change.type === 'remove') {
+                ctx.removeCurrentAction(change.id);
+            }
             setNodes((nds) => applyNodeChanges(nodeChanges, nds));
         },
-        [setNodes],
+        [setNodes, ctx.removeCurrentAction],
     );
 
     const onEdgesChange = useCallback(

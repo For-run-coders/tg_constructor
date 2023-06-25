@@ -31,8 +31,11 @@ const ConstructorComponent: FC<ConstructorProps> = (props) => {
     };
 
     const handleAddCurrentAction = (newAction: TgActionRequest) => {
-        const ne = [...currentActions, newAction];
-        setCurrentActions(ne);
+        setCurrentActions([...currentActions, newAction]);
+    };
+
+    const handleRemoveCurrentAction = (id: string) => {
+        setCurrentActions(prev => prev.filter(action => action.id !== id));
     };
 
     const ctxValue: ConstructorContextData = {
@@ -41,7 +44,8 @@ const ConstructorComponent: FC<ConstructorProps> = (props) => {
         currentActions: currentActions,
         changeCurrentAction: handleChangeAction,
         changeSelectAction: handleSelectAction,
-        addCurrentAction: handleAddCurrentAction
+        addCurrentAction: handleAddCurrentAction,
+        removeCurrentAction: handleRemoveCurrentAction,
     };
 
     return (

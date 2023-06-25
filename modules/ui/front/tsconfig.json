@@ -22,7 +22,8 @@
     "skipLibCheck": true,
     "isolatedModules": true,
     "noEmit": false,
-    "sourceMap": true
+    "sourceMap": true,
+    "useDefineForClassFields": true
   },
   "include": [
     "src"

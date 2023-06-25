@@ -18,6 +18,23 @@ app.post('/create-bot', async (req, res) => {
         insert into bot.configuration("name", data) values ('test', format(${JSON.stringify(actions)})::json)
     `;
 });
+app.get('/actions', async (req, res) => {
+    const resultActions = await sql`select name, description from bot.action`;
+    const resultActionFields = await sql`select name, description, type, action_name from bot.action_field`;
+    const result = [];
+    resultActions.forEach(action => {
+        result.push({
+            name: action.name,
+            description: action.description,
+            fields: resultActionFields.filter(field => field['action_name'] === action.name).map(field => ({
+                name: field.name,
+                description: field.description,
+                type: field.type
+            }))
+        });
+    });
+    res.send(result);
+});
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`);

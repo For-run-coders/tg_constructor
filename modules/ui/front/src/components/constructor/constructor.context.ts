@@ -9,6 +9,7 @@ export interface ConstructorContextData {
     changeSelectAction: (action: NullableTgActionBase) => void;
     changeCurrentAction: (newAction: TgActionRequest) => void;
     addCurrentAction: (newAction: TgActionRequest) => void;
+    removeCurrentAction: (id: string) => void;
 }
 
 export const ConstructorContext = React.createContext<ConstructorContextData>({
@@ -18,4 +19,5 @@ export const ConstructorContext = React.createContext<ConstructorContextData>({
     changeSelectAction: () => {},
     changeCurrentAction: () => {},
     addCurrentAction: () => {},
+    removeCurrentAction: () => {},
 });

@@ -1,34 +1,35 @@
-import React from 'react';
-import { Constructor } from '../components/constructor/constructor';
-import { TgActionBase } from '../model/tg-action.base';
+import React, {useEffect, useState} from 'react';
+import {Constructor} from '../components/constructor/constructor';
+import {observer} from "mobx-react";
+import {useAppContext} from "../context/app.context";
 
-const ACTIONS: TgActionBase[] = [
-    {
-        name: 'Button',
-        description: 'Кнопка в телеграм боте',
-        fields: [
-            {
-                name: 'Title',
-                description: 'Заголовок кнопки',
-                type: 'STRING',
-            },
-        ],
-    },
-    {
-        name: 'Message',
-        description: 'Отправка сообщения',
-        fields: [
-            {
-                name: 'Message',
-                description: 'Ответ бота',
-                type: 'STRING',
-            },
-        ],
-    },
-];
+const CreateNewBotPage = observer(() => {
 
-const CreateNewBotPage = () => {
-    return <Constructor actions={ACTIONS} />;
-};
+    const { api, store } = useAppContext();
+
+    const [isLoading, setLoading] = useState<boolean>(false);
+
+    const loadActions = async () => {
+        setLoading(true);
+        try {
+             const result = await api.constructorApi.getActions();
+        } catch (error) {
+            console.error(error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        loadActions();
+    }, []);
+
+
+    if (isLoading) {
+        return <div>Loading...</div>;
+    }
+
+    return <Constructor actions={store.constructorStore.actions} />;
+});
 
 export default CreateNewBotPage;

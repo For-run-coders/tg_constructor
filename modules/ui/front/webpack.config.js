@@ -5,7 +5,7 @@ const PROD_MODE = 'production';
 const DEV_MODE = 'development';
 
 module.exports = (env) => {
-    const mode = env.mode || PROD_MODE
+    const mode = env.mode || DEV_MODE
     return {
         mode: mode,
         entry: './src/index.ts',
