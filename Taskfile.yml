@@ -1,0 +1,53 @@
+version: "3"
+
+tasks:
+  build-config:
+    cmds:
+      - task: build-go
+        vars:
+          MODULE_DIR: config_service
+
+  build-pulling-proxy:
+    cmds:
+      - task: build-go
+        vars:
+          MODULE_DIR: pulling_telegram_proxy
+
+  build-bot:
+    cmds:
+      - task: build-go
+        vars:
+          MODULE_DIR: bot
+
+  build-image:
+    cmds:
+      - task: build-docker-image
+
+  push-image:
+    deps: [build-image]
+    cmds:
+      - task: push-docker-image
+
+  build-go:
+    internal: true
+    label: "build-{{ .MODULE_DIR}}"
+    dir: modules/{{ .MODULE_DIR }}
+    cmds:
+      - go build -o ./output/ main.go
+      - go test -v
+    sources:
+      - ./**.go
+    generates:
+      - ./output/main
+
+  build-docker-image:
+    internal: true
+    dir: modules/{{ .MODULE_DIR }}
+    cmds:
+      - docker build -f ./Dockerfile -t ghcr.io/for-run-coders/{{ .MODULE_DIR }} ../
+
+  push-docker-image:
+    internal: true
+    cmds:
+      - docker login ghcr.io
+      - docker push ghcr.io/for-run-coders/{{ .MODULE_DIR }}
