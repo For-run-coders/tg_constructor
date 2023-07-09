@@ -41,6 +41,8 @@ tasks:
     cmds:
       - go build -o ./output/ main.go
       - go test -v
+    requires:
+      vars: [MODULE_DIR]
     sources:
       - ./**.go
     generates:
@@ -51,9 +53,13 @@ tasks:
     dir: modules/{{ .MODULE_DIR }}
     cmds:
       - docker build -f ./Dockerfile -t ghcr.io/for-run-coders/{{ .MODULE_DIR }} ../
+    requires:
+      vars: [MODULE_DIR]
 
   push-docker-image:
     internal: true
     cmds:
       - docker login ghcr.io
       - docker push ghcr.io/for-run-coders/{{ .MODULE_DIR }}
+    requires:
+      vars: [MODULE_DIR]
