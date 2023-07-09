@@ -1,0 +1,2 @@
+[workspace]
+members = ["modules/haproxy_api_client", "modules/haproxy_integrator"]
