@@ -1,6 +1,12 @@
 version: "3"
 
 tasks:
+  build-all:
+    cmds:
+      - task: build-config
+      - task: build-pulling-proxy
+      - task: build-bot
+
   build-config:
     cmds:
       - task: build-go

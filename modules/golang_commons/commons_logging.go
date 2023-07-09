@@ -1,4 +1,4 @@
-package commons_logging
+package commons
 
 import (
 	"os"

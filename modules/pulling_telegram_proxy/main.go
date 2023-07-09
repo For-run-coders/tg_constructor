@@ -2,14 +2,11 @@ package main
 
 import (
 	"flag"
-	"fmt"
-	commons_logging "hakaton/golang_commons"
+	commons "hakaton/golang_commons"
 	"hakaton/pulling_telegram_proxy/pkg/config"
 	database "hakaton/pulling_telegram_proxy/pkg/db"
 	"hakaton/pulling_telegram_proxy/pkg/domain"
 	"hakaton/pulling_telegram_proxy/pkg/tg_http"
-	"os"
-	"strings"
 
 	log "github.com/sirupsen/logrus"
 )
@@ -26,8 +23,8 @@ var (
 )
 
 func main() {
-	commons_logging.ConfigureLogger("pulling_telegram_proxy")
-	SetFlagsFromEnvironment()
+	commons.ConfigureLogger("pulling_telegram_proxy")
+	commons.SetFlagsFromEnvironment()
 	flag.Parse()
 	validateFlags()
 
@@ -77,18 +74,4 @@ func validateFlags() {
 		flag.PrintDefaults()
 		log.Fatal("BOT_NAME is empty")
 	}
-}
-
-func SetFlagsFromEnvironment() (err error) {
-	flag.VisitAll(func(f *flag.Flag) {
-		name := strings.ToUpper(strings.Replace(f.Name, "-", "_", -1))
-		if value, ok := os.LookupEnv(name); ok {
-			err2 := flag.Set(f.Name, value)
-			if err2 != nil {
-				err = fmt.Errorf("failed setting flag from environment: %w", err2)
-			}
-		}
-	})
-
-	return
 }
